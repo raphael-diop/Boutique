@@ -1,7 +1,5 @@
 <?php
-require ("../back/ModelProduits.php");
-$produits = new Produits();
-$prod = $produits->getBestSellers();
+
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +16,13 @@ $prod = $produits->getBestSellers();
     <main>
         <div class="containerMenuImage">
             <!-- MENU CAT GAUCHE-->
-                <form class="menuGauche" action="" method="get">
-                        <input type="submit" name="cheminées" value="Cheminées">
-                        <input type="submit" name="fauteuils" value="Fauteils">
-                        <input type="submit" name="Sculptures" value="Sculptures">
-                        <input type="submit" name="Luminaires" value="Luminaires">
-                        <input type="submit" name="Tables" value="Tables">
-                        <input type="submit" name="Tabourets" value="Tabourets">
+                <form class="menuGauche" action="boutique.php" method="get">
+                        <input type="submit" name="catégorie" value="Cheminées">
+                        <input type="submit" name="catégorie" value="Fauteuils">
+                        <input type="submit" name="catégorie" value="Sculptures">
+                        <input type="submit" name="catégorie" value="Luminaires">
+                        <input type="submit" name="catégorie" value="Tables">
+                        <input type="submit" name="catégorie" value="Tabourets">
                 </form>
             <!-- PHOTO  -->
             <div>
