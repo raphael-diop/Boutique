@@ -20,7 +20,7 @@
                         <input type="submit" name="catégorie" value="Cheminées">
                         <input type="submit" name="catégorie" value="Fauteuils">
                         <input type="submit" name="catégorie" value="Sculptures">
-                        <input type="submit" name="catégorie" value="Luminaires">
+                        <input type="submit" name="catégorie" value="Suspensions">
                         <input type="submit" name="catégorie" value="Tables">
                         <input type="submit" name="catégorie" value="Tabourets">
                 </form>

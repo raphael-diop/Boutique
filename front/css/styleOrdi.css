@@ -451,6 +451,7 @@ a {
     flex-direction: row;
 }
 
-.containerForm{
-    
+.disabled {
+    display: none;
 }
+

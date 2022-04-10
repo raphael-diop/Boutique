@@ -1,3 +1,10 @@
+<?php
+require ("../back/ModelPanier.php");
+$panier = new Panier();
+$addpanier = $panier->recupPanier();
+var_dump($addpanier);
+var_dump($prod_id);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +16,9 @@
 </head>
 <body>
 
-<?php require 'header.php'; ?>
+<?php //require 'header.php'; ?>
 <main>
+
     <a href="payment.php">va payer </a>
 </main>
 <?php require 'footer.php'; ?>

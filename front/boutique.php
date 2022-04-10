@@ -1,21 +1,29 @@
 <?php
 require ("../back/ModelPagination.php");
+require ("../back/ModelPanier.php");
 $pagination = new Pagination();
 
-$fix = null;
-
+//Gestion Pagination 
 $pag = $pagination->Pagination();
 $getajout = "&amp;";
-//recup produit en fonction de la catégories
+
+//Gestion Categories
+$fix = null;
 if(isset($_GET["catégorie"]) && !empty($_GET["catégorie"])){
     $nomcat = $_GET["catégorie"];
 }else{
     $nomcat = $fix;
 }
+$currentPage = $pag[2];
+$pages = $pag[1];
 
 $cat = $pagination->getCategorie($nomcat);
 
+//Gestion ajout panier
+$panier = new Panier();
+$addpanier = $panier->verif();
 
+ var_dump($_SESSION["panier"]);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +37,7 @@ $cat = $pagination->getCategorie($nomcat);
     <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital@0;1&display=swap');</style>
 </head>
 <body>
-<?php require 'header.php'; ?>
+<?php //require 'header.php'; ?>
     <main>
         <div class="containerallProduits">
             <div class="containerMenuProduits">
@@ -47,13 +55,14 @@ $cat = $pagination->getCategorie($nomcat);
 
               <?php
               if(!isset($nomcat)){
-                foreach($pag as $pags) {
+                foreach($pag[0] as $pags[0]) {
                 ?>
                 <div class="containerProduits">
                     <div class="produits">  
-                        <img src="<?php print $pags['url'] ?>">
-                        <p><?= $pags['titre']; ?></p> 
-                        <p><?= $pags['prix']; ?></p>
+                        <img src="<?php print $pags[0]['url'] ?>">
+                        <p><?= $pags[0]['titre']; ?></p> 
+                        <p><?= $pags[0]['prix']; ?></p>
+                        <p><a href="boutique.php?id=<?=$pags[0]['id_produit'];?>"><img style="width:50px; height:50px;" src="./images/panier.jpg" alt="panier"></a></p>
                         </div>
                     <?php
                     }
@@ -68,6 +77,7 @@ $cat = $pagination->getCategorie($nomcat);
                                 <img src="<?php print $cats['url'] ?>">
                                 <p><?= $cats['titre']; ?></p> 
                                 <p><?= $cats['prix']; ?></p>
+                                <p><a href="boutique.php?id=<?=$cats['id_produit'];?>"><img style="width:50px; height:50px;" src="./images/panier.jpg" alt="panier"></a></p>
                                 </div>
                             <?php
                     }
@@ -104,7 +114,8 @@ $cat = $pagination->getCategorie($nomcat);
         </div>
 
 
-    <?php require 'footer.php'; ?>
+    <?php var_dump($pages); 
+     require 'footer.php'; ?>
 
 </body>
 </html>

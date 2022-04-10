@@ -8,21 +8,25 @@ class Pagination extends Produits{
     }
 
     public function pagination(){
-        // On compte le nombre de produits
-        $getProd = $this->bdd->prepare("SELECT * FROM `produits`");
-        $getProd->execute();
-        $nbrProdTotal = (int)$getProd->rowCount();
         
+        // On compte le nombre de produits
+        // $getProd = $this->bdd->prepare("SELECT * FROM `produits`");
+        // $getProd->execute();
+        // $nbrProdTotal = (int)$getProd->rowCount();
+        
+        $sql = "SELECT COUNT(*) AS nbrProdTotal FROM produits;";
+        $query = $this->bdd->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+
+        $nbrProdTotal = (int) $result['nbrProdTotal'];
         
         //Charger le nombre de produits par page
         $nbrProdpage = 5;
-        global $nbrProdTotal;
-        global $currentPage;
-
+      
         //Nombre de pages
-        $pages = ($nbrProdTotal/$nbrProdpage);
-        global $pages;
-
+        $pages = ceil($nbrProdTotal / $nbrProdpage);
+    
         //Calcul de la page courante 
         if(isset($_GET['page']) && !empty($_GET['page'])){
             $currentPage = (int) strip_tags($_GET['page']);
@@ -40,7 +44,8 @@ class Pagination extends Produits{
         $query = $this->bdd->prepare($sql);
         $query->execute();
         $produits= $query->fetchAll(PDO::FETCH_ASSOC);
-        return $produits;
+        return array ($produits, $pages,$currentPage);
+        
     }
 
     public function getCategorie($nomcat) {
