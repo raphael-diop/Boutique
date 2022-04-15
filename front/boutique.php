@@ -1,29 +1,47 @@
 <?php
 require ("../back/ModelPagination.php");
 require ("../back/ModelPanier.php");
-$pagination = new Pagination();
 
-//Gestion Pagination 
+$pagination = new Pagination();
+//Gestion Pagination
 $pag = $pagination->Pagination();
 $getajout = "&amp;";
+
+if($pag[3] > 5) {
+    // afficher la pagination
+}
+elseif($pag[3] === null) {
+    // affichage des produits et la pagination disparait
+    $pagination = null;
+}
 
 //Gestion Categories
 $fix = null;
 if(isset($_GET["catégorie"]) && !empty($_GET["catégorie"])){
     $nomcat = $_GET["catégorie"];
+    $cat = $pagination->getCategorie($nomcat);
+    $currentPage = $cat['2'];
+    $pages = $cat['1'];
+    var_dump($cat);
 }else{
     $nomcat = $fix;
-}
-$currentPage = $pag[2];
-$pages = $pag[1];
+    $pag = $pagination->Pagination();
+    $currentPage = $pag['2'];
+    $pages = $pag['1'];
+    var_dump($pag);
 
-$cat = $pagination->getCategorie($nomcat);
+}
+var_dump($cat);
+
+
+
+//$cat = $pagination->getCategorie($nomcat);
 
 //Gestion ajout panier
 $panier = new Panier();
 $addpanier = $panier->verif();
 
- var_dump($_SESSION["panier"]);
+ //var_dump($_SESSION["panier"]);
 ?>
 
 <!DOCTYPE html>
@@ -70,14 +88,15 @@ $addpanier = $panier->verif();
                 <?php    
                 ;}
                  else{
-                    foreach($cat as $cats) {
+                    //var_dump($cat);
+                    foreach($cat[0] as $cats[0]) {
                         ?>
                         <div class="containerProduits">
                             <div class="produits">  
-                                <img src="<?php print $cats['url'] ?>">
-                                <p><?= $cats['titre']; ?></p> 
-                                <p><?= $cats['prix']; ?></p>
-                                <p><a href="boutique.php?id=<?=$cats['id_produit'];?>"><img style="width:50px; height:50px;" src="./images/panier.jpg" alt="panier"></a></p>
+                                <img src="<?php print $cats[0]['url']; ?>">
+                                <p><?= $cats[0]['titre']; ?></p> 
+                                <p><?= $cats[0]['prix']; ?></p>
+                                <p><a href="boutique.php?id=<?=$cats[0]['id_produit'];?>"><img style="width:50px; height:50px;" src="./images/panier.jpg" alt="panier"></a></p>
                                 </div>
                             <?php
                     }
@@ -100,7 +119,7 @@ $addpanier = $panier->verif();
                         <li class="<?php if($currentPage == '1') {echo "disabled"; } ?>"> 
                             <a href="./boutique.php<?php if(isset($_GET['catégorie']) && !empty($_GET['catégorie'])) {echo "?catégorie=" . $nomcat . $getajout ;} else {echo "?"; }?>page=<?= $currentPage - 1 ?>" > ◄</a>
                         </li>
-                        <?php for($page = 1; $page <= $pages; $page++): ?>
+                        <?php  for($page = 1; $page <= $pages; $page++): ?>
                           <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) https://www.youtube.com/watch?v=dH4xHMFfS6c 28:00-->
                           <li <?= ($currentPage == $page) ? "active" : "" ?>>
                                 <a href="./boutique.php<?php if(isset($_GET['catégorie']) && !empty($_GET['catégorie'])) {echo "?catégorie=" . $nomcat . $getajout ;} else {echo "?"; }?>page=<?= $page ?>"><?= $page ?></a>

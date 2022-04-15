@@ -455,3 +455,86 @@ a {
     display: none;
 }
 
+.textarea {
+    margin-top:3%;
+   text-align: center;
+   position:relative;
+   z-index: 1000;
+}
+
+.texterg {
+    position:relative;
+    width: 83%;
+    height: 60%;
+    font-family: 'Cormorant Garamond', serif;
+    z-index: 1000;
+    font-size: 1.5em;
+    padding: 2%;
+
+
+}
+
+.texterg2 {
+    position:relative;
+    z-index: 1000;
+    width: 60%;
+    height: 30%;
+    border: none;
+    font-size: 1.5em;
+    font-family: 'Cormorant Garamond', serif;
+
+}
+
+.titredoc {
+    text-align: center;
+    font-family: 'Cormorant Garond', serif;
+    weight: bold;
+    font-size: 1.5em;
+
+    
+}
+
+.blockrg {
+    position: absolute;
+width: 403.63px;
+height: 704.89px;
+left: -12%;
+top: 293px;
+
+background: #F5F9FC;
+transform: rotate(25.67deg);
+z-index: -1;
+}
+
+.blockrg2 {
+position: absolute;
+width: 817.17px;
+height: 1438.93px;
+left: 70%;
+top: 32%;
+
+background: #FCF5FC;
+transform: rotate(60deg);
+z-index: -1;
+}
+
+.containerrg {
+    text-align: center;
+    box-shadow: 2px 3px 2px 3px rgba(0, 0, 0, 0.1);
+    height:auto;
+    margin: 6% 13%;
+    padding-top: 3%;
+    padding-bottom: 5%;
+    background-color: rgba(255, 255, 255, 0.4);
+
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* * {
+    overflow-x: hidden; 
+
+} */
