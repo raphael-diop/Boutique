@@ -44,7 +44,7 @@ class Pagination extends Produits{
         $query = $this->bdd->prepare($sql);
         $query->execute();
         $produits= $query->fetchAll(PDO::FETCH_ASSOC);
-        return array ($produits, $pages,$currentPage);
+        return array ($produits, $pages,$currentPage, $result['nbrProdTotal']);
         
     }
 
@@ -54,13 +54,30 @@ class Pagination extends Produits{
         $getId->execute();
         $getId = $getId->fetch(PDO::FETCH_ASSOC);
     
-        
-        //récupération des produit de la catégorie
+
+
+        $sql = "SELECT COUNT(*) AS nbrProdTotal FROM produits WHERE  `categorie` = '$nomcat';"; //verfier la query
+        $query = $this->bdd->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+
+        $nbrProdTotal = (int) $result['nbrProdTotal'];
+
+        $nbrProdpage = 5;
+        $pages = ceil($nbrProdTotal / $nbrProdpage);
+
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+                $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+                $currentPage = 1;
+        }
+        $premier = ($currentPage * $nbrProdpage) - $nbrProdpage;
+
         $getCat = $this->bdd->prepare("SELECT*FROM images INNER JOIN produits ON id_produit = produits.id INNER JOIN categories ON produits.id_categorie = categories.id WHERE categories.id= $getId[id]");
         $getCat -> execute();
-        $getCategorie= $getCat->fetchAll(PDO::FETCH_ASSOC);
-        return $getCategorie;
+        $produits= $getCat->fetchAll(PDO::FETCH_ASSOC);
 
+        return array ($produits, $pages,$currentPage, $result['nbrProdTotal']);
     }
 }
 ?>
