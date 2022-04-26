@@ -56,7 +56,7 @@
     margin-top: 6%;
     list-style: none;
     display: flex;
-    justify-content: sapce-around;
+    justify-content: space-around;
     flex-direction: row;
     padding: 1rem 0px;
     margin-right: 3rem;
@@ -377,6 +377,111 @@ a {
 .produits img{
     width: 300px;
     height: auto;
+}
+
+/*///////PRODUITS//////*/
+
+.containerProduit{
+    margin-top:12%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 93%;
+    margin-left: 3%;
+}
+
+.containerProduitImageMain{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.containerProduitTexte{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    align-items: center;
+}
+
+.containerProduitTexte p{
+    width: 700px;
+}
+
+.containerProduitPrix{
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    align-items: center;
+}
+
+.boutonPanierProduit{
+    display: block;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    color: #020202;
+    font-size: 30px;
+    background-color: #fff;
+    /*border-radius: 50%;*/
+    position: flex;
+    bottom: -555px;
+    right: 90px;
+    text-decoration: none;
+    transition: transform 0.5s;
+}
+
+.boutonPanierProduit:hover{
+    text-decoration: none;
+    color: #020202;
+    transform: scale(1.2);
+}
+
+.containerProduitPanier img{
+    display: flex;
+    margin-left: 95%;
+    width: 60px;
+    height: 55px;
+}
+
+.containerDetailsTech{
+    margin-top:5%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 93%;
+    margin-left: 3%;
+}
+
+.containerDetailsText{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    align-items: center;
+}
+
+.containerDetailsTexte p{
+    display: flex;
+    font-weight: 400;
+}
+
+.containerDetailsText h1{
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.containerDetailsImage img{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    float: right;
 }
 
 /*///////USERS/////////*/
