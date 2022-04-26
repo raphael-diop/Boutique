@@ -18,19 +18,7 @@ class Docs extends Model{
         return $getDocs;
     }
 
-    public function getConfid(){
-        $getconf = $this->bdd->prepare("SELECT * FROM `documents` WHERE `id` = :id");
-        $getconf -> execute(array(':id' => 5));
-        $getconfid = $getconf->fetch(PDO::FETCH_ASSOC);
-        return $getconfid;
-    }
-
-    public function getCGV(){
-        $getconf = $this->bdd->prepare("SELECT * FROM `documents` WHERE `id` = :id");
-        $getconf -> execute(array(':id' => 2));
-        $getconfid = $getconf->fetch(PDO::FETCH_ASSOC);
-        return $getconfid;
-    }
-
 }
 ?>
+
+
