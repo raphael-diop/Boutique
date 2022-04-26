@@ -47,20 +47,21 @@ class Admin extends Model{
         return $getProduit;
         }
 
-    public function modifOneProd($id, $prix, $title, $descriptif, $categorie){
+    public function modifOneProd($id, $prix, $title, $descriptif, $details, $categorie){
         $prix = addslashes($prix);
         $title = addslashes($title);
         $descriptif = addslashes($descriptif);
-        $modifProd = $this->bdd->prepare("UPDATE produits SET prix = '$prix', titre = '$title', descriptif = '$descriptif', id_categorie = '$categorie'  WHERE id = $id");
+        $modifProd = $this->bdd->prepare("UPDATE produits SET prix = '$prix', titre = '$title', descriptif = '$descriptif', details = '$details', id_categorie = '$categorie'  WHERE id = $id");
         $modifProd->execute();
         $modifOneProd = $modifProd->fetchall(PDO::FETCH_ASSOC);
         return $modifOneProd;
         }
 
-    public function addOneProd($prix, $title, $descriptif, $categorie){
+    public function addOneProd($prix, $title, $descriptif, $details, $categorie){
         $prix = addslashes($prix);
         $title = addslashes($title);
         $descriptif = addslashes($descriptif);
+        $details = addslashes($details);
         $request = "SELECT titre FROM `produits` WHERE titre = '$title'";
         $calcul = $this->bdd->prepare($request);
         $calcul -> execute();
@@ -71,7 +72,7 @@ class Admin extends Model{
         $messNewProd = "Le nom du produit doit être unique, réessayez avec un autre nom.";
     }
         else {
-            $requetesql1 = "INSERT INTO `produits` (`prix`, `titre`, `descriptif`, `id_categorie`) VALUES ('$prix', '$title', '$descriptif', '$categorie')";
+            $requetesql1 = "INSERT INTO `produits` (`prix`, `titre`, `descriptif`, `details`, `id_categorie`) VALUES ('$prix', '$title', '$descriptif', '$details', '$categorie')";
         $calcul1 = $this->bdd->prepare($requetesql1);
         $calcul1 -> execute();
         $messNewProd = "Première étape réussi";
@@ -87,6 +88,7 @@ class Admin extends Model{
         $calculid -> execute();
         $id_Art = $calculid->fetchall(PDO::FETCH_ASSOC);
         $idArt = $id_Art['0']['id'];
+        var_dump($id_Art);
 
 
         if(mime_content_type($dataImage['img_file']) == "image/jpeg" || mime_content_type($dataImage['img_file']) == "image/png" || mime_content_type($dataImage['img_file']) == "image/webp") {
