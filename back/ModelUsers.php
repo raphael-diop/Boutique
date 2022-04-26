@@ -68,10 +68,14 @@ class User extends Model{
                     $calcul3 = $this->bdd->prepare($request3);
                     $calcul3 -> execute();
                     $result3 = $calcul3-> fetchAll(PDO::FETCH_ASSOC);
-                    $_SESSION['user'] = $result3;
+                    $_SESSION['user'] = $result3[0]['id'];
                     $_SESSION['message'] = '<div class="messageERR">'.'Connexion reussie'.'</div>';
-                    header('Refresh: 3; url=index.php'); 
-                    // A rejouter : header('location:')
+                    if(isset($_SESSION["panier"])){
+                        header('Refresh: 3; url=panier.php');
+                    }else{
+                        header('Refresh: 3; url=index.php');  
+                    }
+                    
                 }else{$_SESSION['message'] = '<div class="messageERR">'.'Password incorrect'.'</div>';}
             }else{$_SESSION['message'] = '<div class="messageERR">'.'Login inexistant'.'</div>';}
     }
