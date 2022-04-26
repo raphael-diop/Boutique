@@ -23,6 +23,7 @@
 
     </form>
     <?php 
+    var_dump($_SESSION['user']);
 
     if(empty($_GET['element'])) {
         $_GET['element'] = null;
@@ -239,18 +240,20 @@
 
                     <p>Description du produit:</p>
                     <textarea id="descriptifprod" name="descriptifprod"><?= $getProduit['0']['descriptif'] ?></textarea> 
+                    <textarea id="descriptifprod" name="detailsprod"><?= $getProduit['0']['details'] ?></textarea> 
                     <input type="submit" class="boutonvalidation" name="submit2" value="Etape Suivante">
                     <input  type="submit" name="supprimerprod" value="supprimer" method="POST"> 
 
 
-                        <?php if(isset($_POST['titleprod']) && isset($_POST['prixprod']) && isset($_POST['descriptifprod']) && isset($_POST['categorie']) ) {
+                        <?php if(isset($_POST['titleprod']) && isset($_POST['prixprod']) && isset($_POST['descriptifprod']) && isset($_POST['detailsprod']) && isset($_POST['categorie']) ) {
                          $_GET['modif'] = $id;
                          $prix = $_POST['prixprod'];
                          $title = $_POST['titleprod'];
                          $descriptif = $_POST['descriptifprod'];
+                         $details = $_POST['detailsprod'];
                          $categorie = $_POST['categorie'];
                          $admincontent = new Admin();
-                         $modifOneProd = $admincontent->modifOneProd($id, $prix, $title, $descriptif, $categorie);
+                         $modifOneProd = $admincontent->modifOneProd($id, $prix, $title, $descriptif, $details, $categorie);
                         }
                         if(isset($_POST['supprimerprod'])) {
                         $_GET['modif'] = $id;
@@ -272,31 +275,36 @@
                          ?>
                          <h1>Création d'un produit</h1>
                     <form action="" method="POST">
-                        <p>Renseigner le nom du produit:</p>
-                    <input type="text" id="titleprod" name="titleprod">
-                    <p>Prix</p>
-                    <input type="text" id="prixprod" name="prixprod">
-                    <h1></h1>
-                    <select name="categorie">
-                        <?php foreach($categories as $categorie) {?>
+                                <p>Renseigner le nom du produit:</p>
+                            <input type="text" id="titleprod" name="titleprod">
+                            <p>Prix</p>
+                            <input type="text" id="prixprod" name="prixprod">
+                            <h1></h1>
+                            <select name="categorie">
+                                <?php foreach($categories as $categorie) {?>
 
-                        <option value="<?=$categorie['id']?>"><?=$categorie['categorie']?></option>
-                        <?php }?>
-                        </select>
+                                <option value="<?=$categorie['id']?>"><?=$categorie['categorie']?></option>
+                                <?php }?>
+                                </select>
 
-                    <p>Description du produit:</p>
-                    <textarea id="descriptifprod" name="descriptifprod"></textarea> 
-                    <input type="submit" class="boutonvalidation" name="submit1" value="Etape Suivante">
+                            <p>Description du produit:</p>
+                            <textarea id="descriptifprod" name="descriptifprod"></textarea> 
+                            <p>Mesures du produit:</p>
+                            <textarea id="detailsprod" name="detailsprod"></textarea> 
+                            <input type="submit" class="boutonvalidation" name="submit1" value="Etape Suivante">
+                        </form>
 
                     
 
-                    <?php if(isset($_POST['titleprod']) && isset($_POST['prixprod']) && isset($_POST['descriptifprod']) && isset($_POST['categorie']) ) {
+                    <?php if(isset($_POST['titleprod']) && isset($_POST['prixprod']) && isset($_POST['descriptifprod']) && isset($_POST['detailsprod']) && isset($_POST['categorie']) ) {
                     $prix = $_POST['prixprod'];
                     $title = $_POST['titleprod'];
                     $descriptif = $_POST['descriptifprod'];
+                    $details = $_POST['detailsprod'];
+                    var_dump($details);
                     $categorie = $_POST['categorie'];
                     $admincontent = new Admin();
-                    $addOneProd = $admincontent->addOneProd($prix, $title, $descriptif, $categorie);
+                    $addOneProd = $admincontent->addOneProd($prix, $title, $descriptif, $details, $categorie);
                     //var_dump($_POST);
                     //var_dump($prix);
 
