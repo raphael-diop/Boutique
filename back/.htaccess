@@ -1,0 +1,4 @@
+deny from all
+<Files front>
+allow from all
+</Files>

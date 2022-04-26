@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+require ("../back/ModelProduits.php");
+$produit = new Produits;
+$prod = $produit->getAllProd();
 ?>
 
 <!DOCTYPE html>

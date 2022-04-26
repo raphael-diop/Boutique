@@ -2,7 +2,7 @@
 require ("../back/ModelPagination.php");
 require ("../back/ModelPanier.php");
 $pagination = new Pagination();
-
+// header("Location: boutique.php");
 //Gestion Pagination 
 $pag = $pagination->Pagination();
 $getajout = "&amp;";
@@ -11,19 +11,17 @@ $getajout = "&amp;";
 $fix = null;
 if(isset($_GET["catégorie"]) && !empty($_GET["catégorie"])){
     $nomcat = $_GET["catégorie"];
+    $cat = $pagination->getCategorie($nomcat);
 }else{
     $nomcat = $fix;
 }
 $currentPage = $pag[2];
 $pages = $pag[1];
 
-$cat = $pagination->getCategorie($nomcat);
-
 //Gestion ajout panier
 $panier = new Panier();
 $addpanier = $panier->verif();
 
- var_dump($_SESSION["panier"]);
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +33,24 @@ $addpanier = $panier->verif();
     <link rel="stylesheet" href="./css/styleOrdi.css">
     <title>Boutique</title>
     <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital@0;1&display=swap');</style>
+
+    <!-- <script>
+    window.addEventListener("DOMContentLoaded", (event) => {    
+        var btPanier = document.querySelectorAll('.btPanier');
+        var notification = document.querySelector('.notification');
+
+        for (var i = 0; i < btPanier.length; i++){
+            btPanier[i].addEventListener('click',() => {
+            notification.classList.add('show');
+        });
+        }
+    })
+    </script> -->
+
 </head>
 <body>
-<?php //require 'header.php'; ?>
+<?php require 'header.php'; ?>
+   
     <main>
         <div class="containerallProduits">
             <div class="containerMenuProduits">
@@ -62,8 +75,14 @@ $addpanier = $panier->verif();
                         <img src="<?php print $pags[0]['url'] ?>">
                         <p><?= $pags[0]['titre']; ?></p> 
                         <p><?= $pags[0]['prix']; ?></p>
-                        <p><a href="boutique.php?id=<?=$pags[0]['id_produit'];?>"><img style="width:50px; height:50px;" src="./images/panier.jpg" alt="panier"></a></p>
-                        </div>
+                        <p>     
+                            <a class="btPanier" href="boutique.php?id=<?=$pags[0]['id_produit'];?>">
+                                <img style="width:50px; height:50px;" src="./images/panier.jpg" alt="panier">
+                            </a>
+                        </p>
+                        
+                    </div>
+                        
                     <?php
                     }
                     ?>
@@ -89,7 +108,6 @@ $addpanier = $panier->verif();
                     </div> 
                 </div>
         </div>
-        
     </main>
     <div class="centrerpagination">
             <nav class="pagination">
@@ -113,9 +131,10 @@ $addpanier = $panier->verif();
                 </nav>
         </div>
 
-
+        
     <?php var_dump($pages); 
      require 'footer.php'; ?>
+
 
 </body>
 </html>

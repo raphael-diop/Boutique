@@ -1,4 +1,5 @@
 <?php
+session_start();
 require ("../back/ModelUsers.php");
 $message = '';
 if(isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['password_retype'])){
